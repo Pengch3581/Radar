@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'Radar.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myblog',        #数据库名
+        'NAME': 'radar',        #数据库名
         'USER':'root',           #用户名
         'PASSWORD':'123456',     #密码
         'HOST':'127.0.0.1',      #本机地址
