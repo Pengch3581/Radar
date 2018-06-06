@@ -45,3 +45,11 @@ class Levels(models.Model):
     def __str__(self):
         return self.level_id
 
+class Types(models.Model):
+    '''
+    告警类型
+    '''
+    type_name = models.CharField('类型名称', max_length=50)
+
+    def __str__(self):
+        return self.type_name
