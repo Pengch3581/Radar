@@ -24,6 +24,341 @@ ALERT_LEVEL_EXP = {'JAVA.rsp_time +is +over':'P2', 'JAVA.CPU.Usage +is +over':'P
                    'Free +disk +space +is +less +than +15%': 'P3', 'Disk +I/O +is +overloaded': 'P2',  'Network +incoming +traffic +is +over +200M': 'P2',
                    'Network +outcoming +traffic +is +over +200M': 'P2'}
 
+base_html = """
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>告警日报</title>
+    <style>
+        /* -------------------------------------
+        INLINED WITH htmlemail.io/inline
+    ------------------------------------- */
+        /* -------------------------------------
+        RESPONSIVE AND MOBILE FRIENDLY STYLES
+    ------------------------------------- */
+        
+        @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+            }
+            table[class=body] p,
+            table[class=body] ul,
+            table[class=body] ol,
+            table[class=body] td,
+            table[class=body] span,
+            table[class=body] a {
+                font-size: 16px !important;
+            }
+            table[class=body] .wrapper,
+            table[class=body] .article {
+                padding: 10px !important;
+            }
+            table[class=body] .content {
+                padding: 0 !important;
+            }
+            table[class=body] .container {
+                padding: 0 !important;
+                width: 100% !important;
+            }
+            table[class=body] .main {
+                border-left-width: 0 !important;
+                border-radius: 0 !important;
+                border-right-width: 0 !important;
+            }
+            table[class=body] .btn table {
+                width: 100% !important;
+            }
+            table[class=body] .btn a {
+                width: 100% !important;
+            }
+            table[class=body] .img-responsive {
+                height: auto !important;
+                max-width: 100% !important;
+                width: auto !important;
+            }
+        }
+        /* -------------------------------------
+        PRESERVE THESE STYLES IN THE HEAD
+    ------------------------------------- */
+        
+        @media all {
+            .ExternalClass {
+                width: 100%;
+            }
+            .ExternalClass,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+                line-height: 100%;
+            }
+            .apple-link a {
+                color: inherit !important;
+                font-family: inherit !important;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                line-height: inherit !important;
+                text-decoration: none !important;
+            }
+            .btn-primary table td:hover {
+                background-color: #34495e !important;
+            }
+            .btn-primary a:hover {
+                background-color: #34495e !important;
+                border-color: #34495e !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+    <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+        <tr>
+            <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+            <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 1400px; padding: 10px; width: 1300px;">
+                <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; padding: 10px;">
+
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">This is preheader text. Some clients will show this text as a preview.</span>
+                    <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #232322; border-radius: 3px;">
+
+                        <!-- START MAIN CONTENT AREA -->
+                        <tr>
+                            <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                                    <!-- title 模块 -->
+                                    <tr>
+                                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 0px; font-size: 200%; color: #ffffff">告警日报</p>
+                                        </td>
+                                    </tr>
+                                </table>
+"""
+date_html = """
+                                <table cellspacing="1" cellpadding="1" border="0">
+                                    <tr>
+                                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 40px; font-size: 90%; color: white; padding-bottom:1px;">{0}</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                    <tr>
+                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; font-size: 120%; color: #9A9998"><u>今日告警</u></p>
+                        <div style="width: 100%; height: 110px;">
+                          <div style="width: 10%; float: left; height: 100px; margin-right: 5px; color: white;">
+                            <span style="height: 50px; line-height: 50px; width: 100%; display: block; font-weight: bold;">未恢复报警</span>
+                            <span style="height: 30px; line-height: 30px; width: 100%; display: block; background-color: #2FF5FE; font-size: 120%">12次</span>
+                          </div>
+                          <div style="width: 10%; float: left; height: 100px; margin-right: 5px; color: white;">
+                            <span style="height: 50px; line-height: 50px; width: 100%; display: block; font-weight: bold;">高级别告警</span>
+                            <span style="height: 30px; line-height: 30px; width: 100%; display: block; background-color: #2FF5FE; font-size: 120%">1次</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table> -->
+"""
+
+dailycount_html = """
+                                <!-- 今日告警统计模块 -->
+                                <table cellspacing="3" cellpadding="3" border="0">
+                                    <tr>
+                                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 5px; font-size: 120%; color: #9A9998; padding-bottom:1px; border-bottom:2px solid #3199A4">今日告警统计</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table cellspacing="3" cellpadding="3" border="0">
+                                    <tr>
+                                        <td style="width: 110px; font-weight: bold; font-size: 90%; color: white">未恢复告警</td>
+                                        <td style="width: 110px; font-weight: bold; font-size: 90%; color: white">高级别告警</td>
+                                        <td style="width: 110px; font-weight: bold; font-size: 90%; color: white">总告警</td>
+                                        <td style="width: 110px; font-weight: bold; font-size: 90%; color: white">数据备份失败</td>
+                                        <td style="width: 110px; font-weight: bold; font-size: 90%; color: white">日志备份失败</td>
+                                    </tr>
+                                </table>
+                                <table cellspacing="4" cellpadding="3" border="0">
+                                    <tr>
+                                        <td style="width: 110px; background-color: #32C3D1; font-size: 100%; font-weight: bold; color: white">{0}次</td>
+                                        <td style="width: 110px; background-color: #32C3D1; font-size: 100%; font-weight: bold; color: white">{1}次</td>
+                                        <td style="width: 110px; background-color: #32C3D1; font-size: 100%; font-weight: bold; color: white">{2}次</td>
+                                        <td style="width: 110px; background-color: #32C3D1; font-size: 100%; font-weight: bold; color: white">N/A次</td>
+                                        <td style="width: 110px; background-color: #32C3D1; font-size: 100%; font-weight: bold; color: white">N/A次</td>
+                                    </tr>
+                                </table>
+                                <table cellspacing="3" cellpadding="3" border="0">
+                                    <tr>
+                                        <td style="width: 110px; font-weight: bold; font-size: 90%; color: white">服务树异常服</td>
+                                        <td style="width: 110px; font-weight: bold; font-size: 90%; color: white">服务树新增</td>
+                                        <td style="width: 110px; font-weight: bold; font-size: 90%; color: white">新服清档失败</td>
+                                    </tr>
+                                </table>
+                                <table cellspacing="4" cellpadding="3" border="0">
+                                    <tr>
+                                        <td style="width: 110px; background-color: #32C3D1; font-size: 100%; font-weight: bold; color: white">N/A次</td>
+                                        <td style="width: 110px; background-color: #32C3D1; font-size: 100%; font-weight: bold; color: white">N/A次</td>
+                                        <td style="width: 110px; background-color: #32C3D1; font-size: 100%; font-weight: bold; color: white">N/A次</td>
+                                    </tr>
+                                </table>
+"""
+
+importalert_title_html = """
+                                <!-- 重要告警模块 -->
+                                <table cellspacing="3" cellpadding="3" border="0">
+                                    <tr>
+                                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; margin-top: 15px; font-size: 120%; color: #9A9998; padding-bottom:1px; border-bottom:2px solid #3199A4">重要告警</p>
+                                        </td>
+                                    </tr>
+                                </table>
+"""
+
+importalert_content_html = """
+                                <table cellspacing="0" cellpadding="7" border="0">
+                                    <tr>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">告警：{0}</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">影响范围：{1}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">类型：{2}</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">级别：{3}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">原因：{4}</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">时间：{5}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 500px; font-weight: bold; font-size: 80%; color: #9A9998; border:1px solid #24737B;">描述：{6}</td>
+                                    </tr>
+                                </table>
+                                <table cellspacing="0" cellpadding="0" border="0">
+                                    <tr>
+                                        <td>
+                                            <hr width="600" color="#68686A" />
+                                        </td>
+                                    </tr>
+                                </table>
+"""
+
+nonalert_title_html = """
+                                <!-- 未恢复告警模块 -->
+                                <table cellspacing="3" cellpadding="3" border="0">
+                                    <tr>
+                                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; margin-top: 15px; font-size: 120%; color: #9A9998; padding-bottom:1px; border-bottom:2px solid #3199A4">未恢复告警</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table cellspacing="0" cellpadding="7" border="0">
+                                    <tr>
+                                        <th style="width: 30px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">级别</th>
+                                        <th style="width: 150px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">类型</th>
+                                        <th style="width: 200px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">告警</th>
+                                        <th style="width: 150x; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">主机</th>
+                                        <th style="width: 100px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">时间</th>
+                                        <th style="width: 50px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">状态</th>
+                                    </tr>
+"""
+
+nonalert_content_html = """
+                                    <tr>
+                                        <td style="width: 30px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{0}</td>
+                                        <td style="width: 150px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{1}</td>
+                                        <td style="width: 200px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{2}</td>
+                                        <td style="width: 150px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{3}</td>
+                                        <td style="width: 100px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{4}</td>
+                                        <td style="width: 50px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{5}</td>
+                                    </tr>
+"""
+
+nonalert_end_html = """
+                                </table>
+"""
+
+end_html = """
+                            </td>
+                        </tr>
+
+                        <!-- END MAIN CONTENT AREA -->
+                    </table>
+
+                    <!-- START FOOTER -->
+                    <!--          <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+              <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                <tr>
+                  <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                    <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
+                    <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif" style="text-decoration: underline; color: #999999; font-size: 12px; text-align: center;">Unsubscribe</a>.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                    Powered by <a href="http://htmlemail.io" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">HTMLemail</a>.
+                  </td>
+                </tr>
+              </table>
+            </div> -->
+                    <!-- END FOOTER -->
+
+                    <!-- END CENTERED WHITE CONTAINER -->
+                </div>
+            </td>
+            <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+        </tr>
+    </table>
+</body>
+
+</html>
+"""
+
+class html_alert():
+    '''
+    构建告警 html 邮件模版
+    '''
+    def __init__(self):
+        try:
+            today = datetime.datetime.now().strftime("%Y-%m-%d")
+            print(today)
+            self.html_test = str(date_html).format(today)
+        except FileNotFoundError as identifier:
+            pass
+
+    def daily_count(self):
+        '''
+        汇总每日告警信息
+        '''
+        return self.html_test
+
+    def import_alert(self, parameter_list):
+        pass
+
+    def non_alert(self, parameter_list):
+        pass
+    
+    def new_server(self, parameter_list):
+        pass
+
+
+def send_mail(html):
+    sender = "report@contoso.com"
+    receivers = ['pengchao@game-reign.com']
+    msg = MIMEMultipart()
+    msg['Subject'] = '[告警日报] {}'.format(datetime.date.today())
+    msg['From'] = sender
+    msg['To'] = ', '.join(receivers)
+    part = MIMEText(html, 'html')
+    msg.attach(part)
+    s = smtplib.SMTP('localhost')
+    s.sendmail(sender, receivers, msg.as_string())
+    s.quit()
+
 if __name__ == '__main__':
     r = redis.StrictRedis(host='127.0.0.1', port=6379)
     subjectlist=r.keys()
@@ -38,8 +373,9 @@ if __name__ == '__main__':
         except Exception as e:
             print(e)
     
-    print(len(resovelist.keys()))
+    html_all = html_alert()
+    print(html_all.daily_count())
 
-
+    
 
 
