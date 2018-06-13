@@ -9,9 +9,9 @@ import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-ALERT_LEVEL = {'P0':['Disk dmesg error on', 'MySQL is down on', 'is Down', 'Disk Read-only on'],
-               'P1':['has deadlock on', 'MySQL has just been restarted', 'has just been restarted'],
-               'P2':['JAVA.rsp_time is over', 'BLOCKED is over 20 on', 'webcheck is warning on', 'JAVA.CPU.Usage is over', 'gameport is warning on', 'web.test.fail is warning on']}
+ALERT_LEVEL = {'P0':['Disk +dmesg +error +on', 'MySQL +is +down +on', 'is +Down', 'Disk +Read-only +on'],
+               'P1':['has +deadlock +on', 'MySQL +has +just +been +restarted', 'has +just +been +restarted'],
+               'P2':['JAVA.rsp_time +is +over', 'BLOCKED +is +over +20 +on', 'webcheck +is +warning +on', 'JAVA.CPU.Usage +is +over', 'gameport +is +warning +on', 'web.test.fail +is +warning +on']}
 
 ALERT_LEVEL_USE = {'Disk +dmesg +error':'P0', 'MySQL +is +down':'P0', 'is +DOWN':'P0', 'Disk +Read-only':'P0',
                 'has +deadlock':'P1', 'MySQL +has +just +been +restarted':'P1', 'has +just +been +restarted':'P1',
@@ -318,6 +318,15 @@ end_html = """
 </html>
 """
 
+def create_recomplie(alert_num):
+    re_argv = '('
+    for i in alert_num:
+        i += '|'
+        re_argv += i
+    re_argv = re_argv[:-1]
+    re_argv += ')'
+    return re_argv
+
 class html_alert():
     '''
     构建告警 html 邮件模版
@@ -325,19 +334,31 @@ class html_alert():
     def __init__(self):
         try:
             today = datetime.datetime.now().strftime("%Y-%m-%d")
-            print(today)
             self.html_test = str(date_html).format(today)
         except FileNotFoundError as identifier:
             pass
 
-    def daily_count(self):
+    def daily_count(self, problemlist, resovelist):
         '''
         汇总每日告警信息
         '''
-        return self.html_test
+        # 告警总数
+        alert_count = len(problemlist.keys())
+        # 未恢复告警数
+        no_resover = len(problemlist.keys()) - len(resovelist.keys())
+        # 高级别告警数
+        high_alert = 0
+        a = re.compile(create_recomplie(ALERT_LEVEL['P0']))
+        for i in problemlist.keys():
+            if a.search(str(problemlist[i])[1:]):
+                high_alert += 1
+        return dailycount_html.format(no_resover, high_alert, alert_count)
 
     def import_alert(self, parameter_list):
-        pass
+        """
+        每日重要告警，统计非工作时间内 P0 P1 级别告警
+        """
+        alert_level_P0 = re.compile(create_recomplie(ALERT_LEVEL['P0']))
 
     def non_alert(self, parameter_list):
         pass
@@ -374,8 +395,7 @@ if __name__ == '__main__':
             print(e)
     
     html_all = html_alert()
-    print(html_all.daily_count())
-
+    print(html_all.daily_count(problemlist, resovelist))
     
-
+        
 
