@@ -150,7 +150,7 @@ date_html = """
                                 <!-- <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                     <tr>
                       <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; font-size: 120%; color: #9A9998"><u>今日告警</u></p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; font-size: 120%; color: #D9D9DA"><u>今日告警</u></p>
                         <div style="width: 100%; height: 110px;">
                           <div style="width: 10%; float: left; height: 100px; margin-right: 5px; color: white;">
                             <span style="height: 50px; line-height: 50px; width: 100%; display: block; font-weight: bold;">未恢复报警</span>
@@ -171,7 +171,7 @@ dailycount_html = """
                                 <table cellspacing="3" cellpadding="3" border="0">
                                     <tr>
                                         <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 5px; font-size: 120%; color: #9A9998; padding-bottom:1px; border-bottom:2px solid #3199A4">今日告警统计</p>
+                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 5px; font-size: 120%; color: #D9D9DA; padding-bottom:1px; border-bottom:2px solid #3199A4">今日告警统计</p>
                                         </td>
                                     </tr>
                                 </table>
@@ -216,7 +216,7 @@ importalert_title_html = """
                                 <table cellspacing="3" cellpadding="3" border="0">
                                     <tr>
                                         <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; margin-top: 15px; font-size: 120%; color: #9A9998; padding-bottom:1px; border-bottom:2px solid #3199A4">重要告警</p>
+                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; margin-top: 15px; font-size: 120%; color: #D9D9DA; padding-bottom:1px; border-bottom:2px solid #3199A4">重要告警</p>
                                         </td>
                                     </tr>
                                 </table>
@@ -225,19 +225,19 @@ importalert_title_html = """
 importalert_content_html = """
                                 <table cellspacing="0" cellpadding="7" border="0">
                                     <tr>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">告警：{0}</td>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">影响范围：{1}</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">告警：{0}</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">影响范围：{1}</td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">类型：N/A</td>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">级别：{2}</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">类型：N/A</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">级别：{2}</td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">状态：{3}</td>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">时间：{4} {5}</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">状态：{3}</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">时间：{4} {5}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" style="width: 500px; font-weight: bold; font-size: 80%; color: #9A9998; border:1px solid #24737B;">描述：{6}</td>
+                                        <td colspan="2" style="width: 500px; font-weight: bold; font-size: 80%; color: #D9D9DA; border:1px solid #24737B;">描述：{6}</td>
                                     </tr>
                                 </table>
                                 <table cellspacing="0" cellpadding="0" border="0">
@@ -252,19 +252,19 @@ importalert_content_html = """
 importalert_line_html = """
                                 <table cellspacing="0" cellpadding="7" border="0">
                                     <tr>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">告警：</td>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">影响范围：</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">告警：</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">影响范围：</td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">类型：</td>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">级别：</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">类型：</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">级别：</td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">状态：</td>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">时间：</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">状态：</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">时间：</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" style="width: 500px; font-weight: bold; font-size: 80%; color: #9A9998; border:1px solid #24737B;">描述：</td>
+                                        <td colspan="2" style="width: 500px; font-weight: bold; font-size: 80%; color: #D9D9DA; border:1px solid #24737B;">描述：</td>
                                     </tr>
                                 </table>
                                 <table cellspacing="0" cellpadding="0" border="0">
@@ -281,40 +281,40 @@ nonalert_title_html = """
                                 <table cellspacing="3" cellpadding="3" border="0">
                                     <tr>
                                         <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; margin-top: 15px; font-size: 120%; color: #9A9998; padding-bottom:1px; border-bottom:2px solid #3199A4">未恢复告警</p>
+                                            <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; margin-top: 15px; font-size: 120%; color: #D9D9DA; padding-bottom:1px; border-bottom:2px solid #3199A4">未恢复告警</p>
                                         </td>
                                     </tr>
                                 </table>
                                 <table cellspacing="0" cellpadding="7" border="0">
                                     <tr>
-                                        <th style="width: 30px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">级别</th>
-                                        <th style="width: 50px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">类型</th>
-                                        <th style="width: 500px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">告警</th>
-                                        <th style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">主机</th>
-                                        <th style="width: 100px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">时间</th>
-                                        <th style="width: 60px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">状态</th>
+                                        <th style="width: 30px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">级别</th>
+                                        <th style="width: 50px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">类型</th>
+                                        <th style="width: 500px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">告警</th>
+                                        <th style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">主机</th>
+                                        <th style="width: 100px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">时间</th>
+                                        <th style="width: 60px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">状态</th>
                                     </tr>
 """
 
 nonalert_content_html = """
                                     <tr>
-                                        <td style="width: 30px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{0}</td>
-                                        <td style="width: 50px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">N/A</td>
-                                        <td style="width: 500px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{1}</td>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{2}</td>
-                                        <td style="width: 100px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{3}</td>
-                                        <td style="width: 60px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;">{4}</td>
+                                        <td style="width: 30px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">{0}</td>
+                                        <td style="width: 50px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">N/A</td>
+                                        <td style="width: 500px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">{1}</td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">{2}</td>
+                                        <td style="width: 100px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">{3}</td>
+                                        <td style="width: 60px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;">{4}</td>
                                     </tr>
 """
 
 nonalert_line_html = """
                                     <tr>
-                                        <td style="width: 30px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;"></td>
-                                        <td style="width: 50px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;"></td>
-                                        <td style="width: 500px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;"></td>
-                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;"></td>
-                                        <td style="width: 100px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;"></td>
-                                        <td style="width: 60px; font-weight: bold; font-size: 80%; color: #9A9998; border: 1px solid #24737B;"></td>
+                                        <td style="width: 30px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;"></td>
+                                        <td style="width: 50px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;"></td>
+                                        <td style="width: 500px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;"></td>
+                                        <td style="width: 300px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;"></td>
+                                        <td style="width: 100px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;"></td>
+                                        <td style="width: 60px; font-weight: bold; font-size: 80%; color: #D9D9DA; border: 1px solid #24737B;"></td>
                                     </tr>
 """
 
@@ -327,7 +327,7 @@ new_server_title = """
                   <table cellspacing="3" cellpadding="3" border="0">
                     <tr>
                       <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; margin-top: 15px; font-size: 120%; color: #9A9998; padding-bottom:1px; border-bottom:2px solid #3199A4">新服情况</p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px; margin-top: 15px; font-size: 120%; color: #D9D9DA; padding-bottom:1px; border-bottom:2px solid #3199A4">新服情况</p>
                       </td>
                     </tr>
                   </table>
