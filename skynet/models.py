@@ -12,6 +12,7 @@ class Alerts(models.Model):
         ('0', 'restored'),
         ('1', 'no-recovered'),
     ) # 告警状态
+    
     alert_id = models.CharField('告警id', max_length=20)
     trigger = models.CharField('触发器', max_length=50)
     host = models.CharField('hostname', max_length=30)
@@ -45,6 +46,7 @@ class Levels(models.Model):
     def __str__(self):
         return self.level_id
 
+      
 class Types(models.Model):
     '''
     告警类型
@@ -53,3 +55,4 @@ class Types(models.Model):
 
     def __str__(self):
         return self.type_name
+
