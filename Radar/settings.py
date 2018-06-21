@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'djcelery',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_crontab',
     'skynet',
 ]
 
@@ -150,9 +151,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATIC_URL = '/static/'
 
+# STATICFILES_DIRS
 STATICFILES_DIRS =(
 
     os.path.join(BASE_DIR, 'static'),
 
 )
 
+# Crontab 
+CRONJOBS = (
+    ('30 08 * * *', 'skynet.cron.daily_report'),
+)
