@@ -5,6 +5,8 @@ import redis
 import os, sys, re
 import smtplib
 import datetime
+import requests
+import json
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -378,6 +380,16 @@ def create_recomplie(alert_num):
     re_argv += ')'
     return re_argv
 
+def get_ops_tree(hosts):
+    host = hosts.split('/')[0]
+    ops_url = "http://opstree.ruizhan.com/game/hosts/{}"
+    ops_response = requests.get(ops_url.format(host))
+    if ops_response.json() == []:
+        host_status = 'other'
+    else:
+        host_status = ops_response.json()['state']
+    return host_status
+
 class html_alert():
     '''
     构建告警 html 邮件模版
@@ -433,12 +445,16 @@ class html_alert():
                     alert_status = "已恢复"
                 else:
                     alert_status = "未恢复"
-                alert_time_compile = re.compile('(0[0123456789]|1[89]|2[0123])\:\d\d\:\d\d')
-                if alert_time_compile.search(alert_time):
-                    import_alert_html += '\n' 
-                    import_alert_html += importalert_content_html.format(
-                        alert_name, alert_range, alert_level, alert_status, alert_date, alert_time, alert_description)
-                    import_count += 1
+                # P0 告警不区分非工作时间
+                # alert_time_compile = re.compile('(0[0123456789]|1[89]|2[0123])\:\d\d\:\d\d')
+                # if alert_time_compile.search(alert_time):
+                if get_ops_tree(alert_range) == 'disabled':
+                    continue
+                
+                import_alert_html += '\n' 
+                import_alert_html += importalert_content_html.format(
+                    alert_name, alert_range, alert_level, alert_status, alert_date, alert_time, alert_description)
+                import_count += 1
             elif alert_level_P1.search(str(problemlist[i])[1:]):
                 # for j in ALERT_LEVEL['P0']:
                 #     a = re.compile(j)
@@ -446,7 +462,7 @@ class html_alert():
                 #         alert_name = j
                 alert_name = str(problemlist[i])[:-1].split('#')[2]
                 alert_range = str(problemlist[i])[:-1].split('#')[1]
-                alert_date = str(problemlist[i])[:-1].split('#')[4]
+                alert_date = str(problemlist[i]).split('#')[4]
                 alert_time = str(problemlist[i])[:-1].split('#')[3]
                 alert_description = str(problemlist[i])[:-1].split('#')[0]
                 alert_level = 'P1'
@@ -454,6 +470,8 @@ class html_alert():
                     alert_status = "已恢复"
                 else:
                     alert_status = "未恢复"
+                if get_ops_tree(alert_range) == 'disabled':
+                    continue
                 alert_time_compile = re.compile(
                     '(0[0123456789]|1[89]|2[0123])\:\d\d\:\d\d')
                 if alert_time_compile.search(alert_time):
@@ -483,6 +501,9 @@ class html_alert():
                 non_alert_time = str(problemlist[i])[:-1].split('#')[3]
                 non_alert_name = str(problemlist[i])[:-1].split('#')[2]
                 non_alert_count += 1
+                # 对比服务树，排除 disabled 状态的主机
+                if get_ops_tree(non_alert_range) == 'disabled':
+                    continue
                 if re.compile(non_alert_level_P0).search(str(problemlist[i])):
                     non_alert_level = 'P0'
                 elif re.compile(non_alert_level_P1).search(str(problemlist[i])):
@@ -506,6 +527,7 @@ class html_alert():
 def send_mail(html):
     sender = "report@contoso.com"
     receivers = ['pengchao@game-reign.com']
+    # receivers = ['tech-op@game-reign.com']
     msg = MIMEMultipart()
     msg['Subject'] = '[告警日报] {}'.format(datetime.date.today())
     msg['From'] = sender
@@ -543,9 +565,4 @@ if __name__ == '__main__':
     html_total += '\n'
     html_total += end_html
     send_mail(html_total)
-
     
-
-    
-        
-
