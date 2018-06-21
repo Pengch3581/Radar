@@ -437,7 +437,7 @@ class html_alert():
                         # alert_name = j
                 alert_name = str(problemlist[i])[:-1].split('#')[2]
                 alert_range = str(problemlist[i])[:-1].split('#')[1]
-                alert_date = str(problemlist[i])[:-1].split('#')[4]
+                alert_date = str(problemlist[i]).split('#')[4]
                 alert_time = str(problemlist[i])[:-1].split('#')[3]
                 alert_description = str(problemlist[i])[:-1].split('#')[0]
                 alert_level = 'P0'
