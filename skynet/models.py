@@ -12,7 +12,7 @@ class Alerts(models.Model):
         ('0', 'restored'),
         ('1', 'no-recovered'),
     ) # 告警状态
-    alert_id = models.CharField('告警id', max_length=20)
+    alert_id = models.CharField('告警id', max_length=20 )
     trigger = models.CharField('触发器', max_length=50)
     host = models.CharField('hostname', max_length=30)
     datetime = models.DateField('日期')

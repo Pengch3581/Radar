@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
+from skynet.urls import router
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^token/', include(router.urls)),
+    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
+    url(r'^blank/', TemplateView.as_view(template_name="blank.html"), name="blank"),
 ]
+
