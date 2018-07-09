@@ -15,7 +15,8 @@ User = get_user_model()
 class AlertsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alerts
-        fields = ('alert_id', 'trigger', 'host', 'datetime', 'message','status' )
+        fields = ('alert_id', 'trigger_name', 'host',
+                  'datetime', 'update_time', 'message', 'status')
 
 
 

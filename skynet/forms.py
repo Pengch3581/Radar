@@ -22,7 +22,8 @@ class AlertsFilter(django_filters.FilterSet):
 
     class Meta:
         model = Alerts
-        fields = ('alert_id', 'trigger', 'host', 'datetime', 'message', 'status')
+        fields = ('alert_id', 'trigger_name', 'host',
+                  'datetime', 'update_time', 'message', 'status')
 
 
 class ProblemsFilter(django_filters.FilterSet):
