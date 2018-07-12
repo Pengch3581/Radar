@@ -160,5 +160,5 @@ STATICFILES_DIRS =(
 
 # Crontab 
 CRONJOBS = (
-    ('30 08 * * *', 'skynet.cron.daily_report'),
+    ('*/5 * * * *', 'skynet.cron.group_alert'),
 )
