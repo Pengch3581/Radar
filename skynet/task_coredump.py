@@ -252,6 +252,7 @@ def main():
             send_email(game_server, html)
 
             # 去掉 gateway
+        # 消费端假死问题，强制重新连接
         async_task.reconnect()
 
     # 获取消息队列
