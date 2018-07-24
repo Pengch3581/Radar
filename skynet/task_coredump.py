@@ -11,6 +11,8 @@ from bible.utils import set_fabric_common_env, TIMESTAMP
 from fabric.network import disconnect_all
 import beanstalkc
 import logging
+from multiprocessing import Process
+import threading
 
 import sys
 import os
@@ -38,8 +40,11 @@ class task(object):
         job.delete()
         return job.body
 
-    def reconnect(self):
-        self.beanstalk.reconnect()
+    def reconnect(self, logger):
+        while True:
+            time.sleep(300)
+            logger.info('reconnect')
+            self.beanstalk.reconnect()
 
 
 def use_ops_tree(game, region):
@@ -222,6 +227,14 @@ def main():
     # game_server = 'gcmob_feiliu_10001'
     beanstalk_ip = '10.6.199.35'
     async_task = task(beanstalk_ip)
+
+    # 创建子进程重连
+    # p = Process(target=async_task.reconnect, args=(logger,))
+    # p.start()
+    # 创建子线程重连
+    t = threading.Thread(target=async_task.reconnect,
+                         args=(logger,), name='LoopThread')
+    t.start()
     while True:
         logger.info('heartbeat')
         content = async_task.get(name='ast_webcheck_task')
@@ -253,7 +266,7 @@ def main():
 
             # 去掉 gateway
         # 消费端假死问题，强制重新连接
-        async_task.reconnect()
+        # async_task.reconnect()
 
     # 获取消息队列
 
