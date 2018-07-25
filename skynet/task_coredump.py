@@ -232,14 +232,18 @@ def main():
     # p = Process(target=async_task.reconnect, args=(logger,))
     # p.start()
     # 创建子线程重连
-    t = threading.Thread(target=async_task.reconnect,
+    # t = threading.Thread(target=async_task.reconnect,
                          args=(logger,), name='LoopThread')
-    t.start()
+    # t.start()
     while True:
         logger.info('heartbeat')
         content = async_task.get(name='ast_webcheck_task')
         date = json.loads(content)
         game_server = date['server']
+        # 由于思科防火墙vpn协议，tcp 长连接通道会断掉，所以采用心跳包的形式
+        if game_server == "heartbeat":
+            logger.info('heartbeat')
+            continue
         logger.info(game_server)
 
         ssh_ip, region, port, mixed_server = get_opstree(game_server)

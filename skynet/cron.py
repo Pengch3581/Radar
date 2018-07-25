@@ -24,7 +24,8 @@ class task(object):
 
 
 def daily_report():
-  pass
+    # 发送日报
+
 
 def weekly_report():
     pass
@@ -122,6 +123,13 @@ def rule_match():
     cursor.execute(
         "select host,alert_server from skynet_group_alerts where status = '1'")
     date = cursor.fetchall()
+    # 推入心跳包消息队列
+    async_task = task()
+    heartbody = json.dumps({
+        'host': 'heartbeat',
+        'server': 'heartbeat',
+    })
+    async_task.put('ast_webcheck_task', heartbody)
     for i in date:
         alert_server = i[1].split('S')[0] + i[1].split('S')[1]
         alert_ip = i[0].split('/')[1]
