@@ -160,5 +160,8 @@ STATICFILES_DIRS =(
 
 # Crontab 
 CRONJOBS = (
-    ('*/5 * * * *', 'skynet.cron.group_alert'),
+    ('*/3 * * * *', 'skynet.cron.group_alert',
+     '>>/app/opbin/python/Radar_project/radarvenv3.5/Radar-master/logs/group_alert.log 2>&1'),
+    ('*/3 * * * *', 'skynet.cron.rule_match',
+     '>>/app/opbin/python/Radar_project/radarvenv3.5/Radar-master/logs/rule_match.log 2>&1')
 )
