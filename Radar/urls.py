@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
     url(r'^blank/', TemplateView.as_view(template_name="blank.html"), name="blank"),
+    url(r'^admin/', admin.site.urls),
 ]
 
